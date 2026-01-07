@@ -1,0 +1,945 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Годовщина наших отношений</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        :root {
+            --dark-green: #1a472a;
+            --medium-green: #2d5a3c;
+            --light-green: #3c7550;
+            --gray: #2f2f2f;
+            --light-gray: #4a4a4a;
+            --white: #ffffff;
+            --black: #000000;
+            --accent: #5d9b7c;
+        }
+        
+        body {
+            background-color: var(--gray);
+            color: var(--white);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Шапка сайта */
+        header {
+            background-color: var(--dark-green);
+            padding: 40px 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .header-content {
+            position: relative;
+            z-index: 2;
+        }
+        
+        .heart-decoration {
+            position: absolute;
+            color: rgba(255, 255, 255, 0.05);
+            font-size: 120px;
+            z-index: 1;
+        }
+        
+        .heart-decoration:nth-child(1) {
+            top: 20px;
+            left: 10%;
+        }
+        
+        .heart-decoration:nth-child(2) {
+            bottom: 20px;
+            right: 15%;
+        }
+        
+        h1 {
+            font-size: 3.5rem;
+            margin-bottom: 15px;
+            color: var(--white);
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+        
+        .subtitle {
+            font-size: 1.5rem;
+            color: var(--accent);
+            margin-bottom: 10px;
+        }
+        
+        .anniversary-date {
+            font-size: 1.2rem;
+            color: #cccccc;
+            margin-top: 10px;
+        }
+        
+        /* осн содержимое */
+        .main-content {
+            padding: 60px 0;
+            background-color: var(--gray);
+        }
+        
+        section {
+            margin-bottom: 80px;
+        }
+        
+        h2 {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 40px;
+            color: var(--accent);
+            position: relative;
+            padding-bottom: 15px;
+        }
+        
+        h2:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 3px;
+            background-color: var(--light-green);
+        }
+        
+        /* галерея */
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 25px;
+            margin-top: 30px;
+        }
+        
+        .photo-item {
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            /* height: 300px; */
+            aspect-ratio: 1 / 1;
+            background-color: var(--light-gray);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+        
+        .photo-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4);
+        }
+        
+        .photo-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+            transition: transform 0.5s ease;
+        }
+
+        .photo-item:hover img {
+            transform: scale(1.05);
+        }
+        
+        .photo-caption {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent);
+            padding: 20px;
+            color: white;
+            transform: translateY(10px);
+            opacity: 0;
+            transition: all 0.3s ease;
+        }
+        
+        .photo-item:hover .photo-caption {
+            transform: translateY(0);
+            opacity: 1;
+        }
+        
+
+        .gif-item {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+            transition: transform 0.5s ease;
+        }
+
+        .gif-indicator {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background-color: rgba(0, 0, 0, 0.7);
+            color: white;
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            z-index: 10;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        @keyframes pulse {
+            0% { opacity: 1; }
+            50% { opacity: 0.6; }
+            100% { opacity: 1; }
+        }
+
+        .gif-indicator i {
+            animation: pulse 1.5s infinite;
+        }
+        
+        /* пожелания */
+        .messages-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 30px;
+        }
+        
+        .message-card {
+            background-color: var(--light-gray);
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease;
+        }
+        
+        .message-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .message-icon {
+            font-size: 2.5rem;
+            color: var(--accent);
+            margin-bottom: 20px;
+        }
+        
+        .message-text {
+            font-size: 1.1rem;
+            color: #e0e0e0;
+            line-height: 1.8;
+        }
+        
+        /* достижения */
+        #stats-achievements {
+            background: linear-gradient(135deg, 
+                        var(--dark-green) 0%,
+                        var(--medium-green) 50%,
+                        var(--dark-green) 100%);
+            border-radius: 25px;
+            padding: 60px 30px;
+            margin: 60px 20px;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        #stats-achievements h2 {
+            text-align: center;
+            font-size: 2.8rem;
+            margin-bottom: 50px;
+            color: white;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        /* осн счетчик по центру */
+        .main-counter-wrapper {
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 20px;
+            padding: 40px;
+            margin-bottom: 50px;
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+        }
+
+        .main-counter {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            flex-wrap: wrap;
+        }
+
+        .counter-item.main {
+            text-align: center;
+            padding: 20px;
+            min-width: 150px;
+        }
+
+        .counter-item.main .counter-number {
+            font-size: 4.5rem;
+            font-weight: bold;
+            color: white;
+            display: block;
+            text-shadow: 0 0 20px rgba(93, 155, 124, 0.5);
+            font-family: 'Courier New', monospace;
+        }
+
+        .counter-item.main .counter-label {
+            font-size: 1.3rem;
+            color: var(--accent);
+            margin-top: 10px;
+            font-weight: 500;
+        }
+
+        .counter-subtitle {
+            text-align: center;
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 1.2rem;
+            margin-top: 20px;
+            font-style: italic;
+        }
+
+        /* достижения */
+        .achievements-wrapper {
+            margin-top: 40px;
+        }
+
+        .achievement-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 25px;
+        }
+
+        .achievement-item {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            padding: 25px 15px;
+            text-align: center;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(5px);
+        }
+
+        .achievement-item:hover {
+            transform: translateY(-5px);
+            background: rgba(255, 255, 255, 0.1);
+            border-color: var(--accent);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .achievement-icon {
+            width: 60px;
+            height: 60px;
+            background: rgba(93, 155, 124, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 15px;
+            font-size: 1.8rem;
+            color: var(--accent);
+            border: 2px solid rgba(93, 155, 124, 0.3);
+        }
+
+        .achievement-value {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: white;
+            margin: 10px 0;
+            font-family: 'Segoe UI', sans-serif;
+        }
+
+        .achievement-value.infinite {
+            font-size: 3.5rem;
+            animation: pulse 2s infinite;
+        }
+
+        .achievement-title {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 1rem;
+            margin-top: 5px;
+        }
+        
+        /* футер */
+        footer {
+            background-color: var(--black);
+            padding: 50px 0;
+            text-align: center;
+        }
+        
+        .final-message {
+            font-size: 1.8rem;
+            max-width: 800px;
+            margin: 0 auto 30px;
+            color: var(--white);
+            line-height: 1.6;
+        }
+        
+        .signature {
+            font-size: 1.5rem;
+            color: var(--accent);
+            margin-top: 30px;
+            font-style: italic;
+        }
+        
+        .heart-footer {
+            color: #ff6b6b;
+            font-size: 2rem;
+            margin: 20px 0;
+            animation: heartbeat 1.5s infinite;
+        }
+        
+        @keyframes heartbeat {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+            100% { transform: scale(1); }
+        }
+        
+        /* адаптивность */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.5rem;
+            }
+            
+            h2 {
+                font-size: 2rem;
+            }
+            
+            .gallery {
+                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            }
+            
+            .messages-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .counter-item {
+                margin: 0 10px;
+            }
+            
+            .counter-number {
+                font-size: 2.5rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .subtitle {
+                font-size: 1.2rem;
+            }
+            
+            .gallery {
+                grid-template-columns: 1fr;
+            }
+            
+            .counter {
+                padding: 20px;
+            }
+            
+            .counter-item {
+                display: block;
+                margin: 20px 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- шапка -->
+    <header>
+        <div class="heart-decoration"><i class="fas fa-heart"></i></div>
+        <div class="heart-decoration"><i class="fas fa-heart"></i></div>
+        <div class="container header-content">
+            <h1>С годовщиной!</h1>
+            <p class="subtitle">Самому лучшему парню на свете</p>
+            <p class="anniversary-date">Мы вместе уже <span id="days-counter">0</span> дней</p>
+        </div>
+    </header>
+    
+    <!-- осн содержимое -->
+    <main class="main-content container">
+        <!-- галерея -->
+        <section id="gallery">
+            <h2>Наши воспоминания</h2>
+            <div class="gallery">
+
+                <div class="photo-item">
+                    <img src="./фото/photo_2026-01-07_04-06-44.jpg" alt="Наша первая совместная фотография">
+                    <div class="photo-caption">
+                        <h3>Наше первая совместная фотография</h3>
+                    </div>
+                </div>
+                
+                <div class="photo-item">
+                    <img src="./фото/photo_2026-01-07_04-15-01.jpg">
+                    <div class="photo-caption">
+                        <h3>Мой 1 День Рождения, проведённый вместе. Знакомство с родителями</h3>
+                    </div>
+                </div>
+                
+                <div class="photo-item">
+                    <img src="./фото/photo_2026-01-07_04-15-06.jpg">
+                    <div class="photo-caption">
+                        <h3>Наша первая фотосессия</h3>
+                    </div>
+                </div>
+
+                <div class="photo-item">
+                    <img src="./фото/photo_2026-01-07_04-15-12.jpg">
+                </div>
+
+                <div class="photo-item">
+                    <img src="./фото/photo_2026-01-07_04-15-10.jpg">
+                </div>
+
+                <div class="photo-item">
+                    <img src="./фото/photo_2026-01-07_04-15-15.jpg">
+                </div>
+
+                <div class="photo-item">
+                    <img src="./фото/photo_2026-01-07_04-15-24.jpg">
+                </div>
+
+                <div class="photo-item">
+                    <img src="./фото/photo_2026-01-07_04-15-18.jpg">
+                </div>
+
+                <div class="photo-item">
+                    <img src="./фото/photo_2026-01-07_04-15-27.jpg">
+                </div>
+
+                <div class="photo-item">
+                    <img src="./видео/6.gif" class="gif-item">
+                    <div class="photo-caption">
+                        <h3>Одно из многочисленных милых видео</h3>
+                    </div>
+                </div>
+
+                <div class="photo-item">
+                    <img src="./фото/photo_2026-01-07_04-55-03.jpg">
+                    <div class="photo-caption">
+                        <h3>Встреча после отпуска</h3>
+                    </div>
+                </div>
+
+                <div class="photo-item">
+                    <img src="./видео/7.gif" class="gif-item">
+                    <div class="photo-caption">
+                        <h3>3</h3>
+                    </div>
+                </div>
+
+                <div class="photo-item">
+                    <img src="./фото/photo_2026-01-07_04-55-26.jpg">
+                    <div class="photo-caption">
+                        <h3>С тобой всегда спокойно</h3>
+                    </div>
+                </div>
+
+                <div class="photo-item">
+                    <img src="./видео/1.gif" class="gif-item">
+                    <div class="photo-caption">
+                        <h3>Сон рядом с тобой - моё любимое занятие</h3>
+                    </div>
+                </div>
+
+                <div class="photo-item">
+                    <img src="./фото/photo_2026-01-07_04-55-23.jpg">
+                    <div class="photo-caption">
+                        <h3>Очередной вечер в моей комнате</h3>
+                    </div>
+                </div>
+
+                <div class="photo-item">
+                    <img src="./видео/4.gif" class="gif-item">
+                    <div class="photo-caption">
+                        <h3>Первый день твоего приезда</h3>
+                    </div>
+                </div>
+
+                <div class="photo-item">
+                    <img src="./фото/photo_2026-01-07_04-55-56.jpg">
+                    <div class="photo-caption">
+                        <h3>Дурачимся</h3>
+                    </div>
+                </div>
+
+                <div class="photo-item">
+                    <img src="./видео/5.gif" class="gif-item">
+                    <div class="photo-caption">
+                        <h3>Летние поездки!</h3>
+                    </div>
+                </div>
+
+                <div class="photo-item">
+                    <img src="./фото/photo_2026-01-07_04-55-48.jpg">
+                    <div class="photo-caption">
+                        <h3>Спасибо за поддержку</h3>
+                    </div>
+                </div>
+
+                <div class="photo-item">
+                    <img src="./видео/8.gif" class="gif-item">
+                    <div class="photo-caption">
+                        <h3>Внезапные ночные прогулки</h3>
+                    </div>
+                </div>
+
+                <div class="photo-item">
+                    <img src="./фото/photo_2026-01-07_04-55-44.jpg">
+                    <div class="photo-caption">
+                        <h3>Знакомство с моим коллективом</h3>
+                    </div>
+                </div>
+
+                <div class="photo-item">
+                    <img src="./фото/photo_2026-01-07_04-56-04.jpg">
+                    <div class="photo-caption">
+                        <h3>Пробуем тренды</h3>
+                    </div>
+                </div>
+
+                <div class="photo-item">
+                    <img src="./видео/2.gif" class="gif-item">
+                    <div class="photo-caption">
+                        <h3>Сравнение силовых качеств</h3>
+                    </div>
+                </div>
+
+                <div class="photo-item">
+                    <img src="./фото/photo_2026-01-07_04-56-07.jpg">
+                    <div class="photo-caption">
+                        <h3>Пробуем тренды 2.0</h3>
+                    </div>
+                </div>
+
+                <div class="photo-item">
+                    <img src="./фото/photo_2026-01-07_04-55-13.jpg">
+                    <div class="photo-caption">
+                        <h3>Ещё один концерт, на который ты пришёл меня поддержать</h3>
+                    </div>
+                </div>
+
+                <div class="photo-item">
+                    <img src="./фото/photo_2026-01-07_04-55-19.jpg">
+                    <div class="photo-caption">
+                        <h3>Фотка на память</h3>
+                    </div>
+                </div>
+
+                <div class="photo-item">
+                    <img src="./фото/photo_2026-01-07_04-56-01.jpg">
+                    <div class="photo-caption">
+                        <h3>Проба макияжа</h3>
+                    </div>
+                </div>
+
+                <div class="photo-item">
+                    <img src="./фото/photo_2026-01-07_04-55-30.jpg">
+                    <div class="photo-caption">
+                        <h3>Множество воспоминаний</h3>
+                    </div>
+                </div>
+
+                <div class="photo-item">
+                    <img src="./видео/3.gif" class="gif-item">
+                    <div class="photo-caption">
+                        <h3>Спасибо за то, что рядом!</h3>
+                    </div>
+                </div>
+
+                <div class="photo-item">
+                    <img src="./фото/photo_2026-01-07_04-55-52.jpg">
+                    <div class="photo-caption">
+                        <h3>Люблю тебя!</h3>
+                    </div>
+                </div>
+
+                
+            </div>
+        </section>
+        
+        <!-- пожелания -->
+        <section id="messages">
+            <h2>Мои пожелания тебе</h2>
+            <div class="messages-container">
+
+                <div class="message-card">
+                    <div class="message-icon">
+                        <i class="fas fa-heart"></i>
+                    </div>
+                    <p class="message-text">Желаю тебе всегда оставаться таким же сильным, добрым и заботливым. Ты - моя опора и поддержка, и я ценю каждое мгновение, проведенное с тобой.</p>
+                </div>
+
+                <div class="message-card">
+                    <div class="message-icon">
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <p class="message-text">Пусть все твои мечты сбываются, а цели достигаются. Я верю в тебя больше, чем ты можешь представить, и всегда буду рядом, чтобы поддержать.</p>
+                </div>
+
+                <div class="message-card">
+                    <div class="message-icon">
+                        <i class="fas fa-laugh-beam"></i>
+                    </div>
+                    <p class="message-text">Спасибо за все улыбки, смех и радость, которую ты даришь мне каждый день. Желаю, чтобы в твоей жизни всегда было много счастья и веселья.</p>
+                </div>
+            </div>
+        </section>
+        
+        <!-- щотчик -->
+        <section id="stats-achievements">
+            <h2>Наша история в цифрах</h2>
+            
+            <!-- осн счетчик -->
+            <div class="main-counter-wrapper">
+                <div class="main-counter">
+                    <div class="counter-item main">
+                        <span class="counter-number" id="total-years">0</span>
+                        <span class="counter-label">Лет вместе</span>
+                    </div>
+                    <div class="counter-item main">
+                        <span class="counter-number" id="total-months">0</span>
+                        <span class="counter-label">Месяцев</span>
+                    </div>
+                    <div class="counter-item main">
+                        <span class="counter-number" id="total-days">0</span>
+                        <span class="counter-label">Дней счастья</span>
+                    </div>
+                </div>
+                <p class="counter-subtitle">С того самого дня, когда наши сердца нашли друг друга</p>
+            </div>
+            
+            <!-- достижения -->
+            <div class="achievements-wrapper">
+                <div class="achievement-grid">
+                    <!-- фотки -->
+                    <div class="achievement-item">
+                        <div class="achievement-icon">
+                            <i class="fas fa-camera"></i>
+                        </div>
+                        <div class="achievement-value" data-target="3230">0</div>
+                        <div class="achievement-title">Фотографий</div>
+                    </div>
+                    
+                    <!-- видосы -->
+                    <div class="achievement-item">
+                        <div class="achievement-icon">
+                            <i class="fas fa-video"></i>
+                        </div>
+                        <div class="achievement-value" data-target="2071">0</div>
+                        <div class="achievement-title">Видео</div>
+                    </div>
+                    
+                    <!-- города -->
+                    <div class="achievement-item">
+                        <div class="achievement-icon">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </div>
+                        <div class="achievement-value" data-target="3">0</div>
+                        <div class="achievement-title">Города в Мурманской области</div>
+                    </div>
+                    
+                    <!-- соо -->
+                    <div class="achievement-item">
+                        <div class="achievement-icon">
+                            <i class="fas fa-comment-alt"></i>
+                        </div>
+                        <div class="achievement-value" data-target="121077">0</div>
+                        <div class="achievement-title">Сообщений</div>
+                    </div>
+                    
+                    <!-- тренды -->
+                    <div class="achievement-item">
+                        <div class="achievement-icon">
+                            <i class="fas fa-fire"></i>
+                        </div>
+                        <div class="achievement-value infinite">∞</div>
+                        <div class="achievement-title">Трендов</div>
+                    </div>
+                    
+                    <!-- знакомства -->
+                    <!-- <div class="achievement-item">
+                        <div class="achievement-icon">
+                            <i class="fas fa-handshake"></i>
+                        </div>
+                        <div class="achievement-value" data-target="15">0</div>
+                        <div class="achievement-title">Знакомств</div>
+                    </div> -->
+                    
+                    <!-- танцы -->
+                    <!-- <div class="achievement-item">
+                        <div class="achievement-icon">
+                            <i class="fas fa-music"></i>
+                        </div>
+                        <div class="achievement-value" data-target="7">0</div>
+                        <div class="achievement-title">Выступлений</div>
+                    </div> -->
+                </div>
+            </div>
+        </section>
+    
+    <!-- футер -->
+    <footer>
+        <div class="container">
+            <p class="final-message">Спасибо, что ты есть в моей жизни. Каждый день с тобой - это подарок судьбы, который я ценю больше всего на свете.</p>
+            
+            <div class="heart-footer">
+                <i class="fas fa-heart"></i>
+            </div>
+            
+            <p class="signature">С любовью, твоя девушка</p>
+        </div>
+    </footer>
+    
+    <script>
+        // дата начала отношений
+        const startDate = new Date('2022-06-15'); 
+        const today = new Date();
+        
+        // разница в мс
+        const timeDiff = today.getTime() - startDate.getTime();
+        
+        // разница в дни
+        const daysDiff = Math.floor(timeDiff / (1000 * 3600 * 24));
+        
+        // года и месяца
+        const years = Math.floor(daysDiff / 365);
+        const months = Math.floor((daysDiff % 365) / 30);
+        
+        // анимация чисел
+        function animateNumber(element, target) {
+            const duration = 2000; // 2 секунды
+            const increment = target / (duration / 16); // 60fps
+            let current = 0;
+            
+            const updateCounter = () => {
+                current += increment;
+                if (current < target) {
+                    element.textContent = Math.floor(current).toLocaleString('ru-RU');
+                    requestAnimationFrame(updateCounter);
+                } else {
+                    element.textContent = target.toLocaleString('ru-RU');
+                }
+            };
+            updateCounter();
+        }
+        
+        // анимация достижений
+        function animateAchievementCounters() {
+            const counters = document.querySelectorAll('.achievement-value[data-target]');
+            
+            counters.forEach(counter => {
+                const target = parseInt(counter.getAttribute('data-target'));
+                
+                // запуск при появлении в viewport
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            animateNumber(counter, target);
+                            observer.unobserve(counter);
+                        }
+                    });
+                }, { threshold: 0.5 });
+                
+                observer.observe(counter);
+            });
+        }
+        
+        // обновления счетчика времени
+        function updateTimeCounters() {
+            console.log("Обновляем счетчики времени:", {years, months, daysDiff});
+            
+            // обнова в осн блоке
+            if (document.getElementById('total-years')) {
+                animateNumber(document.getElementById('total-years'), years);
+            }
+            if (document.getElementById('total-months')) {
+                animateNumber(document.getElementById('total-months'), months);
+            }
+            if (document.getElementById('total-days')) {
+                animateNumber(document.getElementById('total-days'), daysDiff);
+            }
+            
+            // форматирование нач даты
+            const startDateFormatted = startDate.toLocaleDateString('ru-RU');
+            if (document.getElementById('start-date')) {
+                document.getElementById('start-date').textContent = startDateFormatted;
+            }
+        }
+        
+        // анимация фоток появление
+        function setupScrollAnimations() {
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            }, observerOptions);
+            
+            // анимация на элем
+            document.querySelectorAll('.photo-item, .message-card, .achievement-item').forEach(el => {
+                el.style.opacity = '0';
+                el.style.transform = 'translateY(20px)';
+                el.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+                observer.observe(el);
+            });
+            
+            // анимация для заголовков
+            document.querySelectorAll('h2').forEach(el => {
+                el.style.opacity = '0';
+                el.style.transform = 'translateY(20px)';
+                el.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
+                observer.observe(el);
+            });
+        }
+        
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log("Сайт загружен! Люблю тебя! ❤️");
+            
+            // запуск анимация
+            setupScrollAnimations();
+            updateTimeCounters();
+            
+            // анимация счетчиков
+            setTimeout(() => {
+                animateAchievementCounters();
+            }, 1000);
+            
+            const videos = document.querySelectorAll('video.gif-item');
+            videos.forEach(video => {
+                const playPromise = video.play();
+                if (playPromise !== undefined) {
+                    playPromise.catch(error => {
+                        video.addEventListener('click', function() {
+                            video.play();
+                        }, { once: true });
+                    });
+                }
+            });
+        });
+        
+        // вывод в консоль для откладки
+        console.log(`Вместе уже: ${years} лет, ${months} месяцев, ${daysDiff} дней`);
+    </script>
+</body>
+</html>
+
