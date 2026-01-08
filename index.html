@@ -370,38 +370,293 @@
         }
         
         /* футер */
+/* Минималистичный вариант */
+/* Самый простой и чистый вариант */
+/* Вариант с градиентной рамкой */
+/* Минималистичный вариант */
         footer {
-            background-color: var(--black);
-            padding: 50px 0;
+            /* background-color: #000000; */
+            padding: 80px 20px;
             text-align: center;
+            border-top: 1px solid #333;
+            margin-top: 100px;
         }
-        
+
+        footer .container {
+            max-width: 700px;
+            margin: 0 auto;
+            background-color: #111;
+            padding: 50px 30px;
+            border: 1px solid #333;
+            /* Абсолютно прямые углы */
+            border-radius: 0;
+            position: relative;
+        }
+
+        /* Угловые элементы для красоты */
+        footer .container::before,
+        footer .container::after {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            border: 2px solid var(--accent);
+        }
+
+        footer .container::before {
+            top: -2px;
+            left: -2px;
+            border-right: none;
+            border-bottom: none;
+        }
+
+        footer .container::after {
+            bottom: -2px;
+            right: -2px;
+            border-left: none;
+            border-top: none;
+        }
+
         .final-message {
-            font-size: 1.8rem;
-            max-width: 800px;
-            margin: 0 auto 30px;
-            color: var(--white);
-            line-height: 1.6;
+            font-size: 1.3rem;
+            color: #ddd;
+            line-height: 1.8;
+            margin-bottom: 25px;
+            padding: 0 10px;
         }
-        
-        .signature {
-            font-size: 1.5rem;
-            color: var(--accent);
-            margin-top: 30px;
-            font-style: italic;
-        }
-        
+
         .heart-footer {
-            color: #ff6b6b;
-            font-size: 2rem;
-            margin: 20px 0;
-            animation: heartbeat 1.5s infinite;
+            color: var(--accent);
+            font-size: 2.5rem;
+            margin: 40px 0;
+        }
+
+        .signature {
+            font-size: 1.6rem;
+            color: #fff;
+            letter-spacing: 2px;
+            margin-top: 30px;
         }
         
         @keyframes heartbeat {
             0% { transform: scale(1); }
             50% { transform: scale(1.2); }
             100% { transform: scale(1); }
+        }
+
+        /* Секция со стихотворением */
+        #poem-from-mom {
+            background: linear-gradient(135deg, 
+                        rgba(26, 71, 42, 0.1) 0%,
+                        rgba(45, 90, 60, 0.2) 50%,
+                        rgba(26, 71, 42, 0.1) 100%);
+            border-radius: 25px;
+            padding: 60px 30px;
+            margin: 80px 20px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .poem-container h2 {
+            text-align: center;
+            color: var(--accent);
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+        }
+
+        .poem-container h2 i {
+            margin-right: 15px;
+            color: #ff6b6b;
+        }
+
+        .poem-intro {
+            text-align: center;
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 1.3rem;
+            margin-bottom: 40px;
+            font-style: italic;
+        }
+
+        /* Карточка со стихотворением */
+        .poem-card {
+            background: rgba(26, 26, 26, 0.85);
+            border-radius: 20px;
+            padding: 40px;
+            max-width: 800px;
+            margin: 0 auto;
+            border: 2px solid rgba(93, 155, 124, 0.3);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3),
+                        0 0 0 1px rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Декоративный уголок */
+        .poem-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, transparent 50%, rgba(93, 155, 124, 0.2) 50%);
+            border-bottom-left-radius: 20px;
+        }
+
+        /* Заголовок стихотворения */
+        .poem-header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid rgba(93, 155, 124, 0.3);
+        }
+
+        .poem-header i {
+            font-size: 2.5rem;
+            color: var(--accent);
+            margin-bottom: 15px;
+        }
+
+        .poem-header h3 {
+            font-size: 1.8rem;
+            color: white;
+            font-weight: 300;
+            letter-spacing: 2px;
+        }
+
+        /* Текст стихотворения */
+        .poem-content {
+            font-family: 'Georgia', 'Times New Roman', serif;
+        }
+
+        .poem-line {
+            font-size: 1.4rem;
+            line-height: 1.8;
+            margin: 15px 0;
+            color: #f0f0f0;
+            text-align: center;
+            padding: 5px 0;
+            position: relative;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInLine 0.8s ease forwards;
+        }
+
+        /* Поэтапная анимация строк */
+        .poem-line:nth-child(1) { animation-delay: 0.2s; }
+        .poem-line:nth-child(2) { animation-delay: 0.4s; }
+        .poem-line:nth-child(3) { animation-delay: 0.6s; }
+        .poem-line:nth-child(4) { animation-delay: 0.8s; }
+        .poem-line:nth-child(6) { animation-delay: 1.2s; }
+        .poem-line:nth-child(7) { animation-delay: 1.4s; }
+        .poem-line:nth-child(8) { animation-delay: 1.6s; }
+        .poem-line:nth-child(9) { animation-delay: 1.8s; }
+        .poem-line:nth-child(10) { animation-delay: 2.0s; }
+        .poem-line:nth-child(12) { animation-delay: 2.4s; }
+        .poem-line:nth-child(13) { animation-delay: 2.6s; }
+        .poem-line:nth-child(14) { animation-delay: 2.8s; }
+        .poem-line:nth-child(15) { animation-delay: 3.0s; }
+
+        @keyframes fadeInLine {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .poem-line.emphasized {
+            color: var(--accent);
+            font-weight: bold;
+            font-size: 1.5rem;
+            margin: 25px 0;
+            text-shadow: 0 0 10px rgba(93, 155, 124, 0.3);
+        }
+
+        /* Разделитель строф */
+        .poem-divider {
+            text-align: center;
+            font-size: 2rem;
+            color: rgba(93, 155, 124, 0.5);
+            margin: 30px 0;
+            opacity: 0;
+            animation: fadeIn 1s ease forwards;
+            animation-delay: 1s;
+        }
+
+        @keyframes fadeIn {
+            to { opacity: 1; }
+        }
+
+        .poem-divider:nth-of-type(2) {
+            animation-delay: 2.2s;
+        }
+
+        /* Подпись */
+        .poem-signature {
+            text-align: right;
+            margin-top: 50px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(93, 155, 124, 0.3);
+            opacity: 0;
+            animation: fadeIn 1.5s ease forwards;
+            animation-delay: 3.5s;
+        }
+
+        .signature-line {
+            font-style: italic;
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 1.2rem;
+            margin-bottom: 5px;
+        }
+
+        .signature-name {
+            font-size: 2rem;
+            color: var(--accent);
+            font-family: 'Brush Script MT', cursive;
+        }
+
+        /* Футер карточки */
+        .poem-footer {
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            text-align: center;
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 1.1rem;
+            opacity: 0;
+            animation: fadeIn 2s ease forwards;
+            animation-delay: 4s;
+        }
+
+        .poem-footer i {
+            color: #ff6b6b;
+            margin-right: 10px;
+            animation: heartbeat 1.5s infinite;
+        }
+
+        /* Адаптивность */
+        @media (max-width: 768px) {
+            #poem-from-mom {
+                padding: 40px 15px;
+                margin: 60px 10px;
+            }
+            
+            .poem-card {
+                padding: 25px;
+            }
+            
+            .poem-line {
+                font-size: 1.2rem;
+            }
+            
+            .poem-line.emphasized {
+                font-size: 1.3rem;
+            }
+            
+            .poem-container h2 {
+                font-size: 2rem;
+            }
         }
         
         /* адаптивность */
@@ -697,6 +952,53 @@
                 </div>
             </div>
         </section>
+
+        <section id="poem-from-mom">
+            <div class="poem-container">
+                <h2><i class="fas fa-heart-circle-plus"></i> Специальный сюрприз</h2>
+                <p class="poem-intro">Моя мама написала стих к этому дню ❤️</p>
+                
+                <div class="poem-card">
+                    <div class="poem-header">
+                        <i class="fas fa-feather-alt"></i>
+                        <h3>Стих про нас</h3>
+                    </div>
+                    
+                    <div class="poem-content">
+                        <div class="poem-text">
+                            <p class="poem-line">Однажды вечером январским</p>
+                            <p class="poem-line">Моя, казалось бы, малышка дочь</p>
+                            <p class="poem-line">Сказала тихо, без опаски:</p>
+                            <p class="poem-line">«Встречаюсь с Тимой, ты не прочь?»</p>
+                            
+                            <div class="poem-divider">❧</div>
+                            
+                            <p class="poem-line">Любовь, ведь, не стоит в сторонке</p>
+                            <p class="poem-line">Ей расстояния не страшны</p>
+                            <p class="poem-line">Всегда на связи - «удаленке»</p>
+                            <p class="poem-line">До ночи разговоры «для души»</p>
+                            
+                            <div class="poem-divider">❧</div>
+                            
+                            <p class="poem-line">Прекрасно смотритесь, ребята</p>
+                            <p class="poem-line">Красивы, молоды, стройны</p>
+                            <p class="poem-line">На ваши фото хватит взгляда,</p>
+                            <p class="poem-line">Чтоб видеть, как вы влюблены</p>
+                        </div>
+                        
+                        <!-- <div class="poem-signature">
+                            <p class="signature-line">С любовью,</p>
+                            <p class="signature-name">Мама</p>
+                        </div> -->
+                    </div>
+                    
+                    <!-- <div class="poem-footer">
+                        <i class="fas fa-heart"></i>
+                        <span>Семья поддерживает вашу любовь</span>
+                    </div> -->
+                </div>
+            </div>
+        </section>
         
         <!-- щотчик -->
         <section id="stats-achievements">
@@ -793,7 +1095,8 @@
     <!-- футер -->
     <footer>
         <div class="container">
-            <p class="final-message">Спасибо, что ты есть в моей жизни. Каждый день с тобой - это подарок судьбы, который я ценю больше всего на свете.</p>
+            <p class="final-message">Спасибо тебе за всё! Я рада, что несмотря на внешние факторы мы вместе. Это лишь начало длинной истории. Каждый день с тобой - это подарок судьбы, который я ценю больше всего на свете. Необычно наши отношения начались и продолжаются в разных форматах. Но в скором времени всё встанет на свои места. Я тебя очень жду. Ты невероятно дорог для меня. Ты моя поддержка и гордость. Я ценю всё, что ты делаешь для меня.</p>
+            <p class="final-message">Я тебя очень сильно люблю!</p>
             
             <div class="heart-footer">
                 <i class="fas fa-heart"></i>
@@ -805,7 +1108,7 @@
     
     <script>
         // дата начала отношений
-        const startDate = new Date('2022-06-15'); 
+        const startDate = new Date('2025-01-09'); 
         const today = new Date();
         
         // разница в мс
@@ -861,6 +1164,10 @@
         function updateTimeCounters() {
             console.log("Обновляем счетчики времени:", {years, months, daysDiff});
             
+            if (document.getElementById('days-counter')) {
+                animateNumber(document.getElementById('days-counter'), daysDiff);
+            }
+
             // обнова в осн блоке
             if (document.getElementById('total-years')) {
                 animateNumber(document.getElementById('total-years'), years);
