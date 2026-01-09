@@ -5,12 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Годовщина наших отношений</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Montserrat:wght@300;400;500&family=Dancing+Script:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            /* font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; */
+            font-family: 'Montserrat', sans-serif;
         }
         
         :root {
@@ -50,6 +54,11 @@
             position: relative;
             z-index: 2;
         }
+
+        #days-counter {
+            font-family: 'Playfair Display', serif !important;
+            font-weight: 600 !important;
+        }
         
         .heart-decoration {
             position: absolute;
@@ -67,25 +76,43 @@
             bottom: 20px;
             right: 15%;
         }
+
+        h1, h2, h3 {
+            font-family: 'Playfair Display', serif; /* Заголовки */
+            font-weight: 500; /* Полужирный */
+            letter-spacing: 0.5px; /* Немного разрядки */
+        }
         
         h1 {
-            font-size: 3.5rem;
+            font-family: 'Playfair Display', serif;
+            font-weight: 600;
+            font-size: 3.8rem;
+            letter-spacing: 1px;
+            line-height: 1.2;
             margin-bottom: 15px;
             color: var(--white);
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
         }
         
         .subtitle {
-            font-size: 1.5rem;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.8rem;
+            font-weight: 300;
+            font-style: italic;
+            letter-spacing: 1.5px;
             color: var(--accent);
             margin-bottom: 10px;
         }
         
         .anniversary-date {
+            font-family: 'Playfair Display', serif !important;
+            font-weight: 600 !important;
+            letter-spacing: 1px !important;
             font-size: 1.2rem;
             color: #cccccc;
             margin-top: 10px;
         }
+
         
         /* осн содержимое */
         .main-content {
@@ -98,8 +125,11 @@
         }
         
         h2 {
+            font-family: 'Playfair Display', serif;
+            font-weight: 500;
+            font-size: 2.8rem;
+            letter-spacing: 1px;
             text-align: center;
-            font-size: 2.5rem;
             margin-bottom: 40px;
             color: var(--accent);
             position: relative;
@@ -168,6 +198,12 @@
             opacity: 0;
             transition: all 0.3s ease;
         }
+
+        .photo-caption h3 {
+            font-family: 'Cormorant Garamond', serif;
+            font-weight: 300;
+            font-size: 1.5rem;
+        }
         
         .photo-item:hover .photo-caption {
             transform: translateY(0);
@@ -196,6 +232,11 @@
             display: flex;
             align-items: center;
             gap: 5px;
+        }
+
+        .gif-indicator .fa-video {
+            color: var(--accent);
+            animation: pulse 1.5s infinite;
         }
 
         @keyframes pulse {
@@ -234,7 +275,10 @@
         }
         
         .message-text {
-            font-size: 1.1rem;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.5rem;
+            line-height: 1.8;
+            font-weight: 400;
             color: #e0e0e0;
             line-height: 1.8;
         }
@@ -284,13 +328,25 @@
             min-width: 150px;
         }
 
+        .counter-number {
+            font-family: 'Playfair Display', serif;
+            font-weight: 600;
+        }
+
         .counter-item.main .counter-number {
             font-size: 4.5rem;
             font-weight: bold;
             color: white;
             display: block;
             text-shadow: 0 0 20px rgba(93, 155, 124, 0.5);
-            font-family: 'Courier New', monospace;
+            font-family: 'Playfair Display', serif; /* вместо Courier New */
+            font-weight: 600;
+        }
+
+        .counter-label {
+            font-family: 'Playfair Display', serif !important;
+            font-weight: 300
+            letter-spacing: 1px !important;
         }
 
         .counter-item.main .counter-label {
@@ -301,11 +357,31 @@
         }
 
         .counter-subtitle {
+
+            font-family: 'Cormorant Garamond', serif !important;
+            font-weight: 300 !important;
+            font-style: italic !important;
             text-align: center;
             color: rgba(255, 255, 255, 0.8);
-            font-size: 1.2rem;
+            font-size: 2rem;
             margin-top: 20px;
             font-style: italic;
+        }
+
+        .video-wrapper {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+
+        video.gif-item {
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* Заполняет квадрат */
+            object-position: center; /* Центрирует видео */
+            background-color: #000; /* Черный фон, пока грузится */
+            display: block;
         }
 
         /* достижения */
@@ -351,8 +427,9 @@
         }
 
         .achievement-value {
+            font-family: 'Playfair Display', serif !important;
+            font-weight: 600;
             font-size: 2.5rem;
-            font-weight: bold;
             color: white;
             margin: 10px 0;
             font-family: 'Segoe UI', sans-serif;
@@ -364,6 +441,9 @@
         }
 
         .achievement-title {
+            font-family: 'Playfair Display', serif !important;
+            font-weight: 300 !important;
+            letter-spacing: 0.5px;
             color: rgba(255, 255, 255, 0.8);
             font-size: 1rem;
             margin-top: 5px;
@@ -418,9 +498,11 @@
         }
 
         .final-message {
-            font-size: 1.3rem;
-            color: #ddd;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.5rem;
             line-height: 1.8;
+            font-weight: 400;
+            color: #ddd;
             margin-bottom: 25px;
             padding: 0 10px;
         }
@@ -432,7 +514,9 @@
         }
 
         .signature {
-            font-size: 1.6rem;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2.2rem;
+            font-weight: 600;
             color: #fff;
             letter-spacing: 2px;
             margin-top: 30px;
@@ -472,9 +556,11 @@
         .poem-intro {
             text-align: center;
             color: rgba(255, 255, 255, 0.8);
-            font-size: 1.3rem;
+            font-size: 2rem;
             margin-bottom: 40px;
             font-style: italic;
+            font-family: 'Cormorant Garamond', serif;
+            font-weight: 400;
         }
 
         /* Карточка со стихотворением */
@@ -531,9 +617,11 @@
         }
 
         .poem-line {
-            font-size: 1.4rem;
+            font-family: 'Cormorant Garamond', serif !important;
+            font-weight: 400 !important;
+            font-size: 1.6rem;
             line-height: 1.8;
-            margin: 15px 0;
+            margin: 5px 0;
             color: #f0f0f0;
             text-align: center;
             padding: 5px 0;
@@ -718,7 +806,9 @@
         <div class="container header-content">
             <h1>С годовщиной!</h1>
             <p class="subtitle">Самому лучшему парню на свете</p>
-            <p class="anniversary-date">Мы вместе уже <span id="days-counter">0</span> дней</p>
+            <p class="anniversary-date">
+                Мы вместе уже <span id="days-counter">0</span> дней
+            </p>
         </div>
     </header>
     
@@ -732,14 +822,14 @@
                 <div class="photo-item">
                     <img src="./фото/photo_2026-01-07_04-06-44.jpg" alt="Наша первая совместная фотография">
                     <div class="photo-caption">
-                        <h3>Наше первая совместная фотография</h3>
+                        <h3>Наша первая совместная фотография!</h3>
                     </div>
                 </div>
                 
                 <div class="photo-item">
                     <img src="./фото/photo_2026-01-07_04-15-01.jpg">
                     <div class="photo-caption">
-                        <h3>Мой 1 День Рождения, проведённый вместе. Знакомство с родителями</h3>
+                        <h3>Мой первый День Рождения, проведённый вместе. Знакомство с родителями</h3>
                     </div>
                 </div>
                 
@@ -775,11 +865,22 @@
                 </div>
 
                 <div class="photo-item">
-                    <img src="./видео/6.gif" class="gif-item">
+                    <div class="video-wrapper">
+                        <video class="gif-item" autoplay muted loop playsinline>
+                            <source src="./видео/6.mp4" type="video/mp4">
+                        </video>
+                    </div>
                     <div class="photo-caption">
                         <h3>Одно из многочисленных милых видео</h3>
                     </div>
                 </div>
+
+                <!-- <div class="photo-item">
+                    <img src="./видео/6.mp4" class="gif-item">
+                    <div class="photo-caption">
+                        <h3>Одно из многочисленных милых видео</h3>
+                    </div>
+                </div> -->
 
                 <div class="photo-item">
                     <img src="./фото/photo_2026-01-07_04-55-03.jpg">
@@ -789,9 +890,13 @@
                 </div>
 
                 <div class="photo-item">
-                    <img src="./видео/7.gif" class="gif-item">
+                    <div class="video-wrapper">
+                        <video class="gif-item" autoplay muted loop playsinline>
+                            <source src="./видео/7.mp4" type="video/mp4">
+                        </video>
+                    </div>
                     <div class="photo-caption">
-                        <h3>3</h3>
+                        <h3>❤️</h3>
                     </div>
                 </div>
 
@@ -803,7 +908,11 @@
                 </div>
 
                 <div class="photo-item">
-                    <img src="./видео/1.gif" class="gif-item">
+                    <div class="video-wrapper">
+                        <video class="gif-item" autoplay muted loop playsinline>
+                            <source src="./видео/1.mp4" type="video/mp4">
+                        </video>
+                    </div>
                     <div class="photo-caption">
                         <h3>Сон рядом с тобой - моё любимое занятие</h3>
                     </div>
@@ -817,7 +926,11 @@
                 </div>
 
                 <div class="photo-item">
-                    <img src="./видео/4.gif" class="gif-item">
+                    <div class="video-wrapper">
+                        <video class="gif-item" autoplay muted loop playsinline>
+                            <source src="./видео/4.mp4" type="video/mp4">
+                        </video>
+                    </div>
                     <div class="photo-caption">
                         <h3>Первый день твоего приезда</h3>
                     </div>
@@ -831,7 +944,11 @@
                 </div>
 
                 <div class="photo-item">
-                    <img src="./видео/5.gif" class="gif-item">
+                    <div class="video-wrapper">
+                        <video class="gif-item" autoplay muted loop playsinline>
+                            <source src="./видео/5.mp4" type="video/mp4">
+                        </video>
+                    </div>
                     <div class="photo-caption">
                         <h3>Летние поездки!</h3>
                     </div>
@@ -845,7 +962,11 @@
                 </div>
 
                 <div class="photo-item">
-                    <img src="./видео/8.gif" class="gif-item">
+                    <div class="video-wrapper">
+                        <video class="gif-item" autoplay muted loop playsinline>
+                            <source src="./видео/8.mp4" type="video/mp4">
+                        </video>
+                    </div>
                     <div class="photo-caption">
                         <h3>Внезапные ночные прогулки</h3>
                     </div>
@@ -866,7 +987,11 @@
                 </div>
 
                 <div class="photo-item">
-                    <img src="./видео/2.gif" class="gif-item">
+                    <div class="video-wrapper">
+                        <video class="gif-item" autoplay muted loop playsinline>
+                            <source src="./видео/2.mp4" type="video/mp4">
+                        </video>
+                    </div>
                     <div class="photo-caption">
                         <h3>Сравнение силовых качеств</h3>
                     </div>
@@ -908,7 +1033,11 @@
                 </div>
 
                 <div class="photo-item">
-                    <img src="./видео/3.gif" class="gif-item">
+                    <div class="video-wrapper">
+                        <video class="gif-item" autoplay muted loop playsinline>
+                            <source src="./видео/3.mp4" type="video/mp4">
+                        </video>
+                    </div>
                     <div class="photo-caption">
                         <h3>Спасибо за то, что рядом!</h3>
                     </div>
